@@ -131,6 +131,36 @@ footer{background:var(--navy);color:#B4C3F0;border-top:1px solid rgba(255,255,25
 footer nav{display:flex;flex-wrap:wrap;gap:8px 20px}
 footer a{text-underline-offset:4px}
 
+/* launch offer bar */
+.offer{background:var(--navy);color:#fff;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 12px;padding:10px 18px;font-size:.92rem;line-height:1.4;text-align:center}
+.offer b{background:#FFC21A;color:var(--navy);font-size:.72rem;letter-spacing:.08em;padding:3px 10px;border-radius:999px}
+.offer small{color:#B4C3F0;font-size:.85rem}
+.offer a{color:#FFC21A;font-weight:800;text-decoration:none;white-space:nowrap}
+.offer a:hover{text-decoration:underline}
+.nav .new{background:#FFE7A3;color:#6B4A00;font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:999px;margin-left:6px;vertical-align:2px}
+
+/* video ads feature */
+.adband{padding-top:8px;padding-bottom:64px}
+.adcard{background:var(--navy);color:#fff;border-radius:20px;padding:22px;display:grid;grid-template-columns:1.15fr 1fr;gap:32px;align-items:center}
+.preview{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:260px;border-radius:14px;overflow:hidden;background:#1E3A9E;color:#fff;text-decoration:none;padding:18px}
+.preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.preview::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(6,16,52,.85),rgba(6,16,52,.1) 60%)}
+.preview > *:not(img){position:relative;z-index:1}
+.preview .tag{position:absolute;top:14px;left:14px;background:#FFC21A;color:var(--navy);font-weight:800;font-size:.8rem;padding:5px 11px;border-radius:999px;z-index:2}
+.preview .dur{position:absolute;top:14px;right:14px;background:rgba(6,16,52,.8);font-weight:600;font-size:.8rem;padding:4px 9px;border-radius:6px;z-index:2}
+.preview .play{position:absolute;top:50%;left:50%;width:68px;height:68px;margin:-50px 0 0 -34px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;z-index:2;transition:transform .15s}
+.preview:hover .play{transform:scale(1.08)}
+.preview .play svg{width:26px;height:26px;fill:var(--navy);margin-left:3px}
+.preview small{font-size:.75rem;font-weight:800;letter-spacing:.08em;color:#C9D4FF}
+.preview strong{font:800 1.2rem var(--display);font-stretch:108%}
+.adtext h2{color:#fff}
+.adtext p{color:#C9D4FF;margin:12px 0 22px;max-width:28em}
+.btn-gold{background:#FFC21A;color:var(--navy)}
+.btn-gold:hover{box-shadow:0 10px 24px rgba(255,194,26,.4)}
+.adtext .fine{font-size:.85rem;color:#B4C3F0;margin:14px 0 0}
+@media (max-width:860px){.adcard{grid-template-columns:1fr;gap:20px}.preview{min-height:210px}.adtext .btn{width:100%;justify-content:center}}
+@media (max-width:560px){.offer small{display:none}.adband{padding-bottom:44px}}
+
 /* floating WhatsApp button */
 .float{position:fixed;right:18px;bottom:18px;z-index:20;box-shadow:0 10px 26px rgba(0,0,0,.3)}
 @media (max-width:560px){.float span{display:none}.float{padding:15px}}
@@ -145,11 +175,18 @@ footer a{text-underline-offset:4px}
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="sheet">
+<div class="offer">
+  <b>LAUNCH OFFER</b>
+  <span>30% off video ad creation for your business</span>
+  <small>(ad spend on Google or Meta not included)</small>
+  <a href="https://ads.vrisama.in/">Request your ad &rarr;</a>
+</div>
 <header class="top pad">
   <a class="mark" href="#top" aria-label="Vrisama home"><i></i>Vrisama</a>
   <nav class="nav" aria-label="Main">
     <a href="#architect">Azure architect</a>
     <a href="#coaching">Coaching</a>
+    <a href="https://ads.vrisama.in/">Video Ads<span class="new">NEW</span></a>
     <a class="btn" href="#contact">Connect</a>
   </nav>
 </header>
@@ -185,7 +222,7 @@ footer a{text-underline-offset:4px}
         </a>
         <a class="node" href="https://ads.vrisama.in/">
           <svg viewBox="0 0 24 24"><path d="M4 10v4l10 4V6zM14 9a3 3 0 0 1 0 6M7 15v3a2 2 0 0 0 2 2h1"/></svg>
-          <div><strong>Ads</strong><span>Campaigns that bring enquiries</span></div>
+          <div><strong>Video Ads</strong><span>Professional video ads for your business</span></div>
         </a>
       </div>
 
@@ -212,6 +249,25 @@ footer a{text-underline-offset:4px}
           <div><strong>Facebook</strong><span>The Learn Azure page</span></div>
         </a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="adband pad" id="video-ads" aria-labelledby="ads-title">
+  <div class="adcard">
+    <a class="preview" href="https://ads.vrisama.in/" target="_blank" rel="noopener" aria-label="Play sample ad: From a quiet shop to a busy store, 17 seconds">
+      <img src="https://ads.vrisama.in/vrisama-ad-poster.jpg" alt="" loading="lazy" onerror="this.remove()">
+      <span class="tag">30% OFF</span>
+      <span class="dur">0:17</span>
+      <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+      <small>SAMPLE AD</small>
+      <strong>From a quiet shop to a busy store.</strong>
+    </a>
+    <div class="adtext">
+      <h2 id="ads-title">Video Ads</h2>
+      <p>Professional video ads designed to help your business attract more customers.</p>
+      <a class="btn btn-gold" href="https://ads.vrisama.in/">Request your ad &rarr;</a>
+      <p class="fine">30% off applies to video creation only. Ad spend on Google or Meta is separate.</p>
     </div>
   </div>
 </section>
@@ -261,7 +317,7 @@ footer a{text-underline-offset:4px}
           <label><input type="checkbox" name="need" value="online coaching"><span>Online coaching</span></label>
           <label><input type="checkbox" name="need" value="career guidance"><span>Career guidance</span></label>
           <label><input type="checkbox" name="need" value="AI"><span>AI</span></label>
-          <label><input type="checkbox" name="need" value="ads for my business"><span>Ads for my business</span></label>
+          <label><input type="checkbox" name="need" value="video ads for my business"><span>Video ads for my business</span></label>
         </div>
       </fieldset>
       <div class="field"><label for="nm">Your name</label><input id="nm" autocomplete="name" placeholder="Name"></div>

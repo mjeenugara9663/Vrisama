@@ -140,24 +140,21 @@ footer a{text-underline-offset:4px}
 
 /* video ads feature */
 .adband{padding-top:8px;padding-bottom:64px}
-.adcard{background:var(--navy);color:#fff;border-radius:20px;padding:22px;display:grid;grid-template-columns:1.15fr 1fr;gap:32px;align-items:center}
-.preview{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:260px;border-radius:14px;overflow:hidden;background:#1E3A9E;color:#fff;text-decoration:none;padding:18px}
-.preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.preview::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(6,16,52,.85),rgba(6,16,52,.1) 60%)}
-.preview > *:not(img){position:relative;z-index:1}
-.preview .tag{position:absolute;top:14px;left:14px;background:#FFC21A;color:var(--navy);font-weight:800;font-size:.8rem;padding:5px 11px;border-radius:999px;z-index:2}
-.preview .dur{position:absolute;top:14px;right:14px;background:rgba(6,16,52,.8);font-weight:600;font-size:.8rem;padding:4px 9px;border-radius:6px;z-index:2}
-.preview .play{position:absolute;top:50%;left:50%;width:68px;height:68px;margin:-50px 0 0 -34px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;z-index:2;transition:transform .15s}
-.preview:hover .play{transform:scale(1.08)}
-.preview .play svg{width:26px;height:26px;fill:var(--navy);margin-left:3px}
-.preview small{font-size:.75rem;font-weight:800;letter-spacing:.08em;color:#C9D4FF}
-.preview strong{font:800 1.2rem var(--display);font-stretch:108%}
+.adcard{background:var(--navy);color:#fff;border-radius:20px;padding:24px;display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:44px;align-items:center}
+.preview{position:relative;width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#1E3A9E}
+.preview video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;display:block}
+.preview .tag{position:absolute;top:12px;left:12px;background:#FFC21A;color:var(--navy);font-weight:800;font-size:.8rem;padding:5px 11px;border-radius:999px;z-index:2;pointer-events:none}
+.preview .play{position:absolute;top:50%;left:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border:0;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;z-index:2;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .15s}
+.preview .play:hover{transform:scale(1.08)}
+.preview .play svg{width:28px;height:28px;fill:var(--navy);margin-left:4px}
+.preview.playing .play,.preview.playing .tag{display:none}
+.adtext small{display:block;font-size:.78rem;font-weight:800;letter-spacing:.08em;color:#FFC21A;margin-bottom:10px}
 .adtext h2{color:#fff}
 .adtext p{color:#C9D4FF;margin:12px 0 22px;max-width:28em}
 .btn-gold{background:#FFC21A;color:var(--navy)}
 .btn-gold:hover{box-shadow:0 10px 24px rgba(255,194,26,.4)}
 .adtext .fine{font-size:.85rem;color:#B4C3F0;margin:14px 0 0}
-@media (max-width:860px){.adcard{grid-template-columns:1fr;gap:20px}.preview{min-height:210px}.adtext .btn{width:100%;justify-content:center}}
+@media (max-width:860px){.adcard{grid-template-columns:1fr;gap:24px}.preview{max-width:300px;margin:0 auto}.adtext .btn{width:100%;justify-content:center}}
 @media (max-width:560px){.adband{padding-bottom:44px}}
 
 /* floating WhatsApp button */
@@ -253,15 +250,13 @@ footer a{text-underline-offset:4px}
 
 <section class="adband pad" id="video-ads" aria-labelledby="ads-title">
   <div class="adcard">
-    <a class="preview" href="https://ads.vrisama.in/" target="_blank" rel="noopener" aria-label="Play sample ad: From a quiet shop to a busy store, 17 seconds">
-      <img src="https://ads.vrisama.in/vrisama-ad-poster.jpg" alt="" loading="lazy" onerror="this.remove()">
+    <div class="preview" id="adpreview">
+      <video id="adv" src="https://ads.vrisama.in/vrisama-ad-mobile.mp4" poster="https://ads.vrisama.in/vrisama-ad-poster.jpg" preload="none" playsinline aria-label="Vrisama sample video ad, 25 seconds"></video>
       <span class="tag">30% OFF</span>
-      <span class="dur">0:17</span>
-      <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-      <small>SAMPLE AD</small>
-      <strong>From a quiet shop to a busy store.</strong>
-    </a>
+      <button class="play" type="button" aria-label="Play sample ad"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
     <div class="adtext">
+      <small>SAMPLE AD · MADE BY VRISAMA</small>
       <h2 id="ads-title">Video Ads</h2>
       <p>Professional video ads designed to help your business attract more customers.</p>
       <a class="btn btn-gold" href="https://ads.vrisama.in/">Request your ad &rarr;</a>
@@ -373,6 +368,10 @@ var WHATSAPP = "918088648210";   // used only inside the WhatsApp links, never s
     var msg='Hi Manju'+(nm?', this is '+nm:'')+'. I\'d like to talk about: '+needs.join(', ')+'.';
     window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank','noopener');
   });
+  var box=document.getElementById('adpreview'), v=document.getElementById('adv');
+  box.querySelector('.play').addEventListener('click',function(){v.controls=true;v.play();});
+  v.addEventListener('play',function(){box.classList.add('playing');});
+  v.addEventListener('ended',function(){box.classList.remove('playing');});
   document.getElementById('yr').textContent=new Date().getFullYear();
 })();
 </script>

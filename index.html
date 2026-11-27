@@ -181,6 +181,7 @@ footer a{text-underline-offset:4px}
   <nav class="nav" aria-label="Main">
     <a href="#architect">Azure architect</a>
     <a href="#coaching">Coaching</a>
+    <a href="#training">Training</a>
     <a href="https://ads.vrisama.in/">Video Ads<span class="new">NEW</span></a>
     <a class="btn" href="#contact">Connect</a>
   </nav>
@@ -285,7 +286,7 @@ footer a{text-underline-offset:4px}
     <div>
       <h2>Online coaching</h2>
       <p class="lede">Live sessions for people who want to learn Azure properly, from first concepts to architect-level thinking. Tell me where you are today and where you want to get to.</p>
-      <p class="lede"><a class="btn" href="#contact">Ask about coaching</a></p>
+      <p class="lede"><a class="btn" href="#training">Register training interest</a></p>
     </div>
     <ul class="list">
       <li><b>Azure from the ground up</b><span>For people starting out in cloud.</span></li>
@@ -293,6 +294,34 @@ footer a{text-underline-offset:4px}
       <li><b>Career guidance</b><span>What to learn next and how to show it.</span></li>
       <li><b>Free lessons</b><span>Tech Talks with Manju on YouTube and the Learn Azure page.</span></li>
     </ul>
+  </div>
+</section>
+
+<section class="band pad" id="training">
+  <div class="two">
+    <div>
+      <h2>Upcoming training &amp; workshops</h2>
+      <p class="lede">Interested in learning Azure, cloud architecture or practical AI automation with Tech Talks with Manju? Tell us what you would like to learn.</p>
+      <p>No classes are currently scheduled. Register your interest to help us plan future training. No payment or booking is required.</p>
+    </div>
+    <form id="training-interest" style="border:1px solid var(--line)">
+      <div class="field"><label for="training-name">Your name</label><input id="training-name" name="name" autocomplete="name" required maxlength="100" placeholder="Full name"></div>
+      <div class="field"><label for="training-email">Email (optional)</label><input id="training-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="Your email address"></div>
+      <fieldset>
+        <legend>What would you like to learn?</legend>
+        <div class="chips">
+          <label><input type="checkbox" name="training-topic" value="Azure fundamentals"><span>Azure fundamentals</span></label>
+          <label><input type="checkbox" name="training-topic" value="Azure architecture and networking"><span>Azure architecture &amp; networking</span></label>
+          <label><input type="checkbox" name="training-topic" value="Microsoft Entra ID and cloud security"><span>Entra ID &amp; cloud security</span></label>
+          <label><input type="checkbox" name="training-topic" value="AI agents and n8n automation"><span>AI agents &amp; n8n</span></label>
+          <label><input type="checkbox" name="training-topic" value="MCP and AI integration"><span>MCP &amp; AI integration</span></label>
+          <label><input type="checkbox" name="training-topic" value="Other training"><span>Other</span></label>
+        </div>
+      </fieldset>
+      <p class="hint">Your details will be included in a WhatsApp message to Vrisama for training-related follow-up only. Nothing is submitted until you send the message in WhatsApp.</p>
+      <button class="btn btn-wa" type="submit">Send training interest via WhatsApp</button>
+      <p class="err" id="training-err" role="alert"></p>
+    </form>
   </div>
 </section>
 
@@ -367,6 +396,18 @@ var WHATSAPP = "918088648210";   // used only inside the WhatsApp links, never s
     var nm=document.getElementById('nm').value.trim();
     var msg='Hi Manju'+(nm?', this is '+nm:'')+'. I\'d like to talk about: '+needs.join(', ')+'.';
     window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank','noopener');
+  });
+  var training=document.getElementById('training-interest'), trainingErr=document.getElementById('training-err');
+  training.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('training-name').value.trim();
+    var email=document.getElementById('training-email').value.trim();
+    var topics=[].map.call(training.querySelectorAll('input[name=training-topic]:checked'),function(c){return c.value;});
+    if(!name){trainingErr.textContent='Please enter your name.';return;}
+    if(!topics.length){trainingErr.textContent='Choose at least one training topic.';return;}
+    trainingErr.textContent='';
+    var message='Hi Manju, I am interested in upcoming Vrisama training.\nName: '+name+'\nTopics: '+topics.join(', ')+(email?'\nEmail: '+email:'')+'\nPlease let me know when suitable training is announced.';
+    window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(message),'_blank','noopener');
   });
   var box=document.getElementById('adpreview'), v=document.getElementById('adv');
   box.querySelector('.play').addEventListener('click',function(){v.controls=true;v.play();});
